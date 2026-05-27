@@ -124,15 +124,68 @@ repo-analyzer/
 │   └── plugin.json                         # Plugin metadata
 ├── package.json                            # Package manifest
 ├── skills/
-│   └── repo-analyzer/
-│       ├── SKILL.md                        # Main skill definition
+│   ├── repo-analyzer/
+│   │   ├── SKILL.md                        # Main skill definition
+│   │   └── references/
+│   │       ├── analysis-guide.md           # Analysis philosophy & evaluation framework
+│   │       └── module-analysis-guide.md    # Module analysis guide & subagent templates
+│   └── module-analyzer/
+│       ├── SKILL.md                        # Module analysis skill definition
 │       └── references/
-│           ├── analysis-guide.md           # Analysis philosophy & evaluation framework
-│           └── module-analysis-guide.md    # Module analysis guide & subagent templates
+│           ├── dependency-analysis-guide.md # LSP-based dependency analysis methodology
+│           └── impact-analysis-guide.md    # Impact analysis guide
 ├── README.md                               # English documentation
 ├── README.zh.md                            # Chinese documentation
 └── LICENSE                                 # MIT License
 ```
+
+## module-analyzer
+
+A companion skill for **large internal C/C++ projects** (100K+ lines per module). Generates function-level module design documentation with dependency mapping, or traces the impact of changing a specific function.
+
+### When to Use
+
+- Generate design documentation for a specific module/directory
+- Understand function-level dependencies and call chains
+- Trace the impact of modifying a function before making changes
+
+### Usage
+
+**Module Design Document** (input: directory path):
+
+```
+分析模块 src/network/http/
+```
+
+```
+生成 src/core/engine/ 的模块设计文档
+```
+
+**Impact Analysis** (input: function name):
+
+```
+分析修改 HttpServer::handleRequest 的影响
+```
+
+```
+谁调用了 parse_config？影响面多大？
+```
+
+### Trigger Keywords
+
+The module-analyzer activates on:
+
+`分析模块` `模块设计文档` `模块文档` `依赖梳理` `影响分析` `改动影响` `函数调用链` `谁调用了` `调用关系` `模块分析` `生成模块文档`
+
+### Requirements
+
+- **clangd LSP** must be configured and functional
+- Works best with `compile_commands.json` available
+
+### Output
+
+Module design documents are saved to `~/repo-analyses/{module-name}-{date}/MODULE_DESIGN.md`.
+Impact analysis is output directly in the conversation.
 
 ## Contributing
 

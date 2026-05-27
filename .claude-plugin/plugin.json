@@ -1,18 +1,27 @@
 {
   "name": "repo-analyzer",
-  "description": "Deep architectural analysis of open-source projects with professional reports",
-  "version": "1.0.0",
-  "author": {
+  "description": "AI coding agent skills for project and module analysis",
+  "owner": {
     "name": "yzddmr6"
   },
-  "homepage": "https://github.com/yzddmr6/repo-analyzer",
-  "repository": "https://github.com/yzddmr6/repo-analyzer",
-  "license": "MIT",
-  "keywords": [
-    "skills",
-    "architecture",
-    "analysis",
-    "code-review",
-    "open-source"
+  "plugins": [
+    {
+      "name": "repo-analyzer",
+      "description": "Deep architectural analysis of open-source projects with professional reports",
+      "version": "1.0.0",
+      "source": "./",
+      "author": {
+        "name": "yzddmr6"
+      }
+    },
+    {
+      "name": "module-analyzer",
+      "description": "Function-level module documentation and impact analysis for large C/C++ projects",
+      "version": "1.0.0",
+      "source": "./",
+      "author": {
+        "name": "yzddmr6"
+      }
+    }
   ]
 }

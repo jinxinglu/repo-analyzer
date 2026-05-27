@@ -124,15 +124,68 @@ repo-analyzer/
 │   └── plugin.json                         # 插件元数据
 ├── package.json                            # 包清单
 ├── skills/
-│   └── repo-analyzer/
-│       ├── SKILL.md                        # 技能主定义
+│   ├── repo-analyzer/
+│   │   ├── SKILL.md                        # 技能主定义
+│   │   └── references/
+│   │       ├── analysis-guide.md           # 分析哲学与评价框架
+│   │       └── module-analysis-guide.md    # 模块分析指南与 Subagent 模板
+│   └── module-analyzer/
+│       ├── SKILL.md                        # 模块分析技能定义
 │       └── references/
-│           ├── analysis-guide.md           # 分析哲学与评价框架
-│           └── module-analysis-guide.md    # 模块分析指南与 Subagent 模板
+│           ├── dependency-analysis-guide.md # 基于 LSP 的依赖分析方法
+│           └── impact-analysis-guide.md    # 影响面分析指南
 ├── README.md                               # 英文文档
 ├── README.zh.md                            # 中文文档
 └── LICENSE                                 # MIT 许可证
 ```
+
+## module-analyzer
+
+面向**大型内部 C/C++ 项目**（单个模块 10 万行以上）的配套技能。生成函数级别的模块设计文档与依赖梳理，或追踪修改某个函数的影响面。
+
+### 适用场景
+
+- 为特定模块/目录生成设计文档
+- 理解函数级别的依赖关系和调用链
+- 在修改函数前追踪影响范围
+
+### 使用方式
+
+**模块设计文档**（输入目录路径）：
+
+```
+分析模块 src/network/http/
+```
+
+```
+生成 src/core/engine/ 的模块设计文档
+```
+
+**影响面分析**（输入函数名）：
+
+```
+分析修改 HttpServer::handleRequest 的影响
+```
+
+```
+谁调用了 parse_config？影响面多大？
+```
+
+### 触发关键词
+
+提到以下任意关键词时技能自动激活：
+
+`分析模块` `模块设计文档` `模块文档` `依赖梳理` `影响分析` `改动影响` `函数调用链` `谁调用了` `调用关系` `模块分析` `生成模块文档`
+
+### 环境要求
+
+- 需配置 **clangd LSP** 并能正常工作
+- 建议有 `compile_commands.json` 编译数据库
+
+### 输出
+
+模块设计文档保存到 `~/repo-analyses/{模块名}-{日期}/MODULE_DESIGN.md`。
+影响面分析直接在对话中输出。
 
 ## 贡献
 

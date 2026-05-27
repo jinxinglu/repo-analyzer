@@ -45,7 +45,7 @@
 阶段 6 必须使用 Agent 工具为每个核心模块启动独立 subagent 并行分析。
 
 调度策略：
-- 每个核心模块 → 一个独立 Agent subagent（`subagent_type: "general-purpose"`）
+- 每个核心模块 → 一个独立 Agent subagent（使用平台默认 agent 类型，不指定 subagent_type）
 - 所有次要模块 → 合并到一个 Agent subagent 批量处理
 - 所有 subagent 在同一消息中并行启动
 

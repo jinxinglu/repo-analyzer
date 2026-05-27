@@ -151,7 +151,7 @@ description: Use when the user mentions "分析模块" "模块设计文档" "模
 #### 调度策略
 
 - 按子目录或功能聚类划分子模块（每个子模块 1-3 万行为宜）
-- 每个子模块 → 一个独立 Agent subagent（`subagent_type: "general-purpose"`）
+- 每个子模块 → 一个独立 Agent subagent（使用平台默认 agent 类型，不指定 subagent_type）
 - 所有 subagent 在同一消息中并行启动
 
 #### Subagent Prompt 要点
